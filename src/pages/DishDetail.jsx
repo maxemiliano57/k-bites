@@ -51,9 +51,7 @@ export default function DishDetail() {
 
           {/* Image */}
           <div style={isMobile ? {} : styles.imageSticky}>
-            <div style={styles.imagePlaceholder}>
-              <span style={styles.imagePlaceholderText}>{dish.nameKo}</span>
-            </div>
+            <img src={dish.imageUrl} alt={dish.name} style={styles.image} />
           </div>
 
           {/* Details */}
@@ -146,15 +144,12 @@ const styles = {
     position: 'sticky',
     top: '80px',
   },
-  imagePlaceholder: {
+  image: {
     width: '100%',
     aspectRatio: '4 / 3',
-    backgroundColor: '#fdf0ee',
+    objectFit: 'cover',
     borderRadius: '1.5rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid #f5c6c0',
+    display: 'block',
   },
   imagePlaceholderText: {
     fontSize: '3.5rem',

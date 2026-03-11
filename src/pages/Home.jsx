@@ -33,7 +33,9 @@ export default function Home() {
 const styles = {
   page: {
     minHeight: 'calc(100vh - 60px)',
-    backgroundColor: '#f7f5f2',
+    backgroundImage: 'url(/images/landing-page.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

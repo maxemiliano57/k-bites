@@ -6,9 +6,7 @@ export default function DishCard({ dish, isFavorite = false, onToggleFavorite })
   return (
     <div style={styles.card}>
       <Link to={`/dishes/${dish.id}`} style={styles.imageLink}>
-        <div style={styles.imagePlaceholder}>
-          <span style={styles.imagePlaceholderText}>{dish.nameKo}</span>
-        </div>
+        <img src={dish.imageUrl} alt={dish.name} style={styles.image} />
       </Link>
 
       <div style={styles.body}>
@@ -50,19 +48,11 @@ const styles = {
     display: 'block',
     textDecoration: 'none',
   },
-  imagePlaceholder: {
+  image: {
     width: '100%',
     aspectRatio: '4 / 3',
-    backgroundColor: '#fdf0ee',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  imagePlaceholderText: {
-    fontSize: '1.75rem',
-    color: '#c0392b',
-    opacity: 0.4,
-    fontWeight: '700',
+    objectFit: 'cover',
+    display: 'block',
   },
   body: {
     padding: '1rem 1.1rem 1.1rem',
