@@ -1,15 +1,30 @@
+import { Link } from 'react-router-dom';
+import { useWindowWidth } from '../hooks/useWindowWidth';
+
 export default function Home() {
+  const width = useWindowWidth();
+  const isMobile = width < 640;
+
   return (
     <div style={styles.page}>
-      <div style={styles.card}>
+      <div style={{
+        ...styles.card,
+        padding: isMobile ? '2.5rem 1.5rem' : '3.5rem 4rem',
+      }}>
         <div style={styles.badge}>한국 음식</div>
-        <h1 style={styles.title}>K-Bites</h1>
+        <h1 style={{
+          ...styles.title,
+          fontSize: isMobile ? '2.4rem' : '3.2rem',
+        }}>
+          K-Bites
+        </h1>
         <div style={styles.divider} />
         <p style={styles.subtitle}>
           Discover iconic Korean dishes, explore ingredients,
-          <br />
+          {isMobile ? ' ' : <br />}
           and save your favorites.
         </p>
+        <Link to="/dishes" style={styles.cta}>Browse Dishes</Link>
       </div>
     </div>
   );
@@ -17,18 +32,17 @@ export default function Home() {
 
 const styles = {
   page: {
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 60px)',
     backgroundColor: '#f7f5f2',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: "'Noto Sans KR', system-ui, sans-serif",
-    padding: '2rem',
+    padding: '2rem 1.25rem',
   },
   card: {
     backgroundColor: '#ffffff',
     borderRadius: '2rem',
-    padding: '3.5rem 4rem',
     maxWidth: '520px',
     width: '100%',
     textAlign: 'center',
@@ -48,7 +62,6 @@ const styles = {
     border: '1px solid #f5c6c0',
   },
   title: {
-    fontSize: '3.2rem',
     fontWeight: '800',
     color: '#1c1612',
     letterSpacing: '-1px',
@@ -68,5 +81,16 @@ const styles = {
     color: '#7a6f66',
     lineHeight: '1.8',
     fontWeight: '400',
+    marginBottom: '2rem',
+  },
+  cta: {
+    display: 'inline-block',
+    padding: '0.6rem 1.75rem',
+    backgroundColor: '#c0392b',
+    color: '#ffffff',
+    borderRadius: '999px',
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    textDecoration: 'none',
   },
 };
