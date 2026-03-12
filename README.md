@@ -93,8 +93,8 @@ k-bites/
 
 ```
 The dish and ingredient data is written directly into the code, which means there is no backend or database.
-Favorites are stored in the browser's localStorage only and do not sync across devices
-The images are not lazy-loaded and may be slow when a user is first visiting the website/
+Favorites are stored in the browser's localStorage only and do not sync across devices.
+The images are not lazy-loaded and may be slow when a user is first visiting the website.
 ```
 ## What I Learned
 
