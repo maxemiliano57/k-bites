@@ -1,12 +1,27 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteButton from './FavoriteButton';
 import SpiceIndicator from './SpiceIndicator';
 
 export default function DishCard({ dish, isFavorite = false, onToggleFavorite }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div style={styles.card}>
       <Link to={`/dishes/${dish.id}`} style={styles.imageLink}>
-        <img src={dish.imageUrl} alt={dish.name} style={styles.image} />
+        {imgError ? (
+          <div style={styles.imagePlaceholder}>
+            <span style={styles.imagePlaceholderEmoji}>🍽</span>
+            <span style={styles.imagePlaceholderText}>{dish.nameKo}</span>
+          </div>
+        ) : (
+          <img
+            src={dish.imageUrl}
+            alt={dish.name}
+            style={styles.image}
+            onError={() => setImgError(true)}
+          />
+        )}
       </Link>
 
       <div style={styles.body}>
@@ -53,6 +68,26 @@ const styles = {
     aspectRatio: '4 / 3',
     objectFit: 'cover',
     display: 'block',
+  },
+  imagePlaceholder: {
+    width: '100%',
+    aspectRatio: '4 / 3',
+    backgroundColor: '#fdf0ee',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.4rem',
+  },
+  imagePlaceholderEmoji: {
+    fontSize: '2.5rem',
+    opacity: 0.5,
+  },
+  imagePlaceholderText: {
+    fontSize: '1rem',
+    color: '#c0392b',
+    opacity: 0.45,
+    fontWeight: '700',
   },
   body: {
     padding: '1rem 1.1rem 1.1rem',

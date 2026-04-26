@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { dishes } from '../data/dishes';
 import { ingredients } from '../data/ingredients';
@@ -21,6 +22,7 @@ export default function DishDetail() {
   const width = useWindowWidth();
   const isMobile = width < 640;
 
+  const [imgError, setImgError] = useState(false);
   const dish = dishes.find((d) => d.id === id);
 
   if (!dish) {
@@ -51,7 +53,19 @@ export default function DishDetail() {
 
           {/* Image */}
           <div style={isMobile ? {} : styles.imageSticky}>
-            <img src={dish.imageUrl} alt={dish.name} style={styles.image} />
+            {imgError ? (
+              <div style={styles.imagePlaceholder}>
+                <span style={styles.imagePlaceholderEmoji}>🍽</span>
+                <span style={styles.imagePlaceholderText}>{dish.nameKo}</span>
+              </div>
+            ) : (
+              <img
+                src={dish.imageUrl}
+                alt={dish.name}
+                style={styles.image}
+                onError={() => setImgError(true)}
+              />
+            )}
           </div>
 
           {/* Details */}
@@ -151,8 +165,23 @@ const styles = {
     borderRadius: '1.5rem',
     display: 'block',
   },
+  imagePlaceholder: {
+    width: '100%',
+    aspectRatio: '4 / 3',
+    backgroundColor: '#fdf0ee',
+    borderRadius: '1.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.75rem',
+  },
+  imagePlaceholderEmoji: {
+    fontSize: '4rem',
+    opacity: 0.45,
+  },
   imagePlaceholderText: {
-    fontSize: '3.5rem',
+    fontSize: '1.5rem',
     color: '#c0392b',
     opacity: 0.35,
     fontWeight: '700',
